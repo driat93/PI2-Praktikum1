@@ -1,1 +1,0 @@
-# PI2-Praktikum1
