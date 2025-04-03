@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Erzeuge ein Objekt der Unterklasse:
+        // Stapelgröße 6, vorbesetzt mit 10, 11, 12, 13, 14, 15.
+        ErweiterterStapel meinStapel = new ErweiterterStapel(6, 10);
+
+        boolean running = true;
+        while (running) {
+            System.out.println("\nWählen Sie eine Aktion:");
+            System.out.println("1 - Wert einfügen (Push)");
+            System.out.println("2 - Obersten Wert entfernen (Pop)");
+            System.out.println("3 - Stapel anzeigen");
+            System.out.println("4 - Array von Werten einfügen (erweiterter Push)");
+            System.out.println("5 - Prüfen, ob der Stapel leer ist");
+            System.out.println("6 - Programm beenden");
+            System.out.print("Ihre Wahl: ");
+            int wahl = scanner.nextInt();
+
+            switch (wahl) {
+                case 1:
+                    System.out.print("Geben Sie den einzufügenden Wert ein: ");
+                    int wert = scanner.nextInt();
+                    int pushErgebnis = meinStapel.hinzufuegen(wert);
+                    if (pushErgebnis == 0) {
+                        System.out.println("Wert erfolgreich eingefügt.");
+                    } else {
+                        System.out.println("Fehler: Stapel ist voll.");
+                    }
+                    break;
+                case 2:
+                    int popErgebnis = meinStapel.entfernen();
+                    if (popErgebnis == -1) {
+                        System.out.println("Fehler: Stapel ist leer.");
+                    } else {
+                        System.out.println("Entfernter Wert: " + popErgebnis);
+                    }
+                    break;
+                case 3:
+                    meinStapel.ausgeben();
+                    break;
+                case 4:
+                    System.out.print("Wie viele Werte möchten Sie einfügen? ");
+                    int anzahl = scanner.nextInt();
+                    int[] werteArray = new int[anzahl];
+                    for (int i = 0; i < anzahl; i++) {
+                        System.out.print("Wert " + (i + 1) + ": ");
+                        werteArray[i] = scanner.nextInt();
+                    }
+                    int erweiterterPushErgebnis = meinStapel.hinzufuegen(werteArray);
+                    if (erweiterterPushErgebnis == 0) {
+                        System.out.println("Alle Werte wurden erfolgreich eingefügt.");
+                    } else {
+                        System.out.println("Fehler: Nicht genügend Platz im Stapel. Stapel bleibt unverändert.");
+                    }
+                    break;
+                case 5:
+                    if (meinStapel.istLeer()) {
+                        System.out.println("Der Stapel ist leer.");
+                    } else {
+                        System.out.println("Der Stapel ist nicht leer.");
+                    }
+                    break;
+                case 6:
+                    running = false;
+                    System.out.println("Programm beendet.");
+                    break;
+                default:
+                    System.out.println("Ungültige Eingabe. Bitte wählen Sie 1-6.");
+                    break;
+            }
+        }
+        scanner.close();
+    }
+}
