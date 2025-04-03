@@ -1,0 +1,42 @@
+public class ErweiterterStapel extends Stapel {
+
+    /**
+     * Konstruktor, der die Stapelgröße und einen Startwert erhält.
+     * Der Stapel wird vollständig gefüllt mit den Werten:
+     * startwert, startwert+1, startwert+2, …, startwert+(groesse-1)
+     */
+    public ErweiterterStapel(int groesse, int startwert) {
+        super(groesse);
+        // Fülle den Stapel vollständig mit der Sequenz
+        for (int i = 0; i < werte.length; i++) {
+            super.hinzufuegen(startwert + i);
+        }
+    }
+
+    /**
+     * Methode, die true zurückgibt, wenn der Stapel leer ist.
+     */
+    public boolean istLeer() {
+        return (oberstes == -1);
+    }
+
+    /**
+     * Erweiterte Push-Methode:
+     * Fügt alle Elemente des übergebenen Arrays auf den Stapel ein,
+     * sofern genügend Platz vorhanden ist.
+     * Falls nicht genügend Platz vorhanden ist, wird der Stapel unverändert gelassen.
+     *
+     * @param werteArray Array der einzufügenden Werte.
+     * @return 0 bei Erfolg, -1 wenn nicht genügend Platz vorhanden ist.
+     */
+    public int hinzufuegen(int[] werteArray) {
+        int freiePlaetze = werte.length - (oberstes + 1);
+        if (freiePlaetze < werteArray.length) {
+            return -1; // Nicht genügend Platz – der Stapel bleibt unverändert.
+        }
+        for (int wert : werteArray) {
+            super.hinzufuegen(wert);
+        }
+        return 0;
+    }
+}
