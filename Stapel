@@ -1,0 +1,42 @@
+public class Stapel {
+    protected int[] werte;      // Array zur Speicherung der Stapel-Einträge
+    protected int oberstes;     // Zeiger auf das oberste Element (Stapelzeiger)
+
+    // Konstruktor: Erstellt einen neuen Stapel mit gegebener (fixer) Größe
+    public Stapel(int groesse) {
+        werte = new int[groesse];
+        oberstes = -1; // Anfangs leer
+    }
+
+    // Methode zum Hinzufügen eines einzelnen Wertes (Push)
+    // Rückgabe: 0 bei Erfolg, -1 wenn der Stapel voll ist
+    public int hinzufuegen(int wert) {
+        if (oberstes >= werte.length - 1) {
+            return -1; // Kein Platz mehr
+        }
+        werte[++oberstes] = wert;
+        return 0;
+    }
+
+    // Methode zum Entfernen des obersten Wertes (Pop)
+    // Rückgabe: Der entfernte Wert oder -1, wenn der Stapel leer ist
+    public int entfernen() {
+        if (oberstes == -1) {
+            return -1; // Stapel ist leer
+        }
+        return werte[oberstes--];
+    }
+
+    // Methode zur Ausgabe des aktuellen Stapelinhalts
+    public void ausgeben() {
+        System.out.println("Kapazität des Stapels: " + werte.length);
+        if (oberstes == -1) {
+            System.out.println("Stapel ist leer.");
+        } else {
+            System.out.println("Aktueller Stapel-Inhalt (von oben nach unten):");
+            for (int i = oberstes; i >= 0; i--) {
+                System.out.println(werte[i]);
+            }
+        }
+    }
+}
